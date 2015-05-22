@@ -13,6 +13,9 @@
 @property(strong,nonatomic)UIView *v;
 @property(strong,nonatomic)UISearchBar *searchBar;
 @property(strong,nonatomic)UITableView *tableview;
+
+@property(strong,nonatomic)UIView *boundv;
+
 @end
 
 @implementation ViewController
@@ -42,9 +45,16 @@
     
     self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
     self.searchBar.placeholder = @"搜索";
+    self.searchBar.showsCancelButton = NO;
     self.tableview.tableHeaderView = self.searchBar;
     self.searchBar.delegate = self;
     
+    self.boundv = [[UIView alloc]initWithFrame:CGRectMake(0, 64+44, self.view.frame.size.width, self.view.frame.size.height-64)];
+    self.boundv.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:self.boundv];
+    self.boundv.hidden = YES;
+    UILabel *lblt = [[UILabel alloc]init];
+    lblt.font = [UIFont systemFontOfSize:15.0f];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,6 +75,10 @@
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     [self.searchBar resignFirstResponder];
     
     CGRect rect = self.view.frame;
@@ -72,6 +86,8 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.view.frame = CGRectMake(0, 0, rect.size.width, rect.size.height);
         self.v.frame = CGRectMake(0, 0, rect1.size.width, rect1.size.height);
+        self.boundv.hidden = YES;
+        self.searchBar.showsCancelButton = NO;
     } completion:^(BOOL finished) {
         
     }];
@@ -90,6 +106,8 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.view.frame = CGRectMake(0, -44, rect.size.width, rect.size.height);
         self.v.frame = CGRectMake(0, -20, rect1.size.width, rect1.size.height);
+        self.boundv.hidden = NO;
+        self.searchBar.showsCancelButton = YES;
     } completion:^(BOOL finished) {
         
     }];
