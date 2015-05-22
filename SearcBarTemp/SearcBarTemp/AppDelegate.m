@@ -23,6 +23,8 @@
     self.window.backgroundColor = UIColor.whiteColor;
     self.window.rootViewController = [[ViewController alloc]init];
     [self.window makeKeyAndVisible];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     
     return YES;
 }

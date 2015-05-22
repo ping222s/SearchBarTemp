@@ -88,8 +88,9 @@
         self.v.frame = CGRectMake(0, 0, rect1.size.width, rect1.size.height);
         self.boundv.hidden = YES;
         self.searchBar.showsCancelButton = NO;
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     } completion:^(BOOL finished) {
-        
+        self.tableview.scrollEnabled = YES;
     }];
 
 }
@@ -108,8 +109,9 @@
         self.v.frame = CGRectMake(0, -20, rect1.size.width, rect1.size.height);
         self.boundv.hidden = NO;
         self.searchBar.showsCancelButton = YES;
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     } completion:^(BOOL finished) {
-        
+        self.tableview.scrollEnabled = NO;
     }];
     
     return YES;
